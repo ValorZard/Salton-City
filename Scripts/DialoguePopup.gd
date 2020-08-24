@@ -10,6 +10,8 @@ var answers setget answers_set
 
 var npc 
 
+onready var answer_labels := []
+export var answer_buffer := 15
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_process_input(false) #cuz its hidden
@@ -58,6 +60,27 @@ func _input(event):
 			npc.talk("B")
 
 func set_answers(answers_array):
+	#delete the labels that were in the answers
+	for label in answer_labels:
+		label.queue_free()
+	answer_labels.clear()
+	
+	var answer_number := 0
+	var dialogue_label := get_node("DialogueBox/Dialogue")
+	
+	for answer in answers_array:
+		var answer_label := Label.new()
+		answer_label.text = answer
+		#offset
+		var vertical_offset = dialogue_label.rect_global_position.y + dialogue_label.rect_size.y + (answer_buffer * answer_number)
+		var horizontal_offset = dialogue_label.rect_global_position.x + rect_size.x/2
+		answer_label.rect_position = Vector2(horizontal_offset, vertical_offset)
+		#color
+		answer_label.set("custom_colors/font_color", Color("Black"))
+		#child
+		add_child(answer_label)
+		answer_labels.append(answer_label)
+		answer_number += 1
 	pass
 
 func _on_AnimationPlayer_animation_finished(anim_name):

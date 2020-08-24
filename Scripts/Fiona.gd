@@ -36,7 +36,7 @@ func talk(answer = ""):
 					dialogue_state = 1
 					# Show dialogue popup
 					dialoguePopup.dialogue = "Hello adventurer! I've lost my necklace, could you find it for me?"
-					dialoguePopup.answers = "[A] Yes [B] No"
+					dialoguePopup.set_answers(["[A] Yes", "[B] No"])
 					dialoguePopup.open()
 					pass
 				1:
@@ -46,7 +46,7 @@ func talk(answer = ""):
 							dialogue_state = 2
 							#Show dialogue popup
 							dialoguePopup.dialogue = "Thank you!"
-							dialoguePopup.answers = "[A] Bye"
+							dialoguePopup.set_answers(["[A] Bye"])
 							dialoguePopup.open()
 							pass
 						"B":
@@ -54,7 +54,7 @@ func talk(answer = ""):
 							dialogue_state = 3
 							#Show dialogue popup
 							dialoguePopup.dialogue = "If you change your mind, you'll find me here...."
-							dialoguePopup.answers = "[A] Bye"
+							dialoguePopup.set_answers(["[A] Bye"])
 							dialoguePopup.open()
 							pass
 				2:
@@ -82,9 +82,9 @@ func talk(answer = ""):
 					#Show dialogue popup
 					dialoguePopup.dialogue = "Did you find my necklace?"
 					if necklace_found:
-						dialoguePopup.answers = "[A] Yes [B] No"
+						dialoguePopup.set_answers(["[A] Yes", "[B] No"])
 					else:
-						dialoguePopup.answers = "[A] No"
+						dialoguePopup.set_answers(["[A] No"])
 					dialoguePopup.open()
 					pass
 				1:
@@ -93,14 +93,14 @@ func talk(answer = ""):
 						dialogue_state = 2
 						#Show dialogue popup
 						dialoguePopup.dialogue = "You're my hero! Please take this potion as thanks!"
-						dialoguePopup.answers = "[A] Thanks"
+						dialoguePopup.set_answers(["[A] Thanks"])
 						dialoguePopup.open()
 					else:
 						#Update dialogue tree state
 						dialogue_state = 3
 						#Show dialogue popup
 						dialoguePopup.dialogue = "Please, find it!"
-						dialoguePopup.answers = "[A] I'll try...."
+						dialoguePopup.set_answers(["[A] I'll try...."])
 						dialoguePopup.open()
 					pass
 				2:
@@ -128,7 +128,7 @@ func talk(answer = ""):
 					dialogue_state = 1
 					#Show dialogue popup
 					dialoguePopup.dialogue = "Thanks again for your help"
-					dialoguePopup.answers = "[A] Bye"
+					dialoguePopup.set_answers(["[A] Bye"])
 					dialoguePopup.open()
 					pass
 				1:

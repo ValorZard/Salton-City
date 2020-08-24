@@ -16,18 +16,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [ 0.0, 1.0 ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("DialogueBox/Answers:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
-}
 
 [node name="UI_Layers" type="CanvasLayer"]
 
@@ -70,18 +58,6 @@ margin_bottom = 84.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Hello adventurer! I lost my necklace, can you find it for me?"
 autowrap = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Answers" type="Label" parent="DialoguePopup/DialogueBox"]
-margin_left = 5.0
-margin_top = 90.0
-margin_right = 295.0
-margin_bottom = 104.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "[A] Yes [B] No"
-align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
