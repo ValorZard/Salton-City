@@ -54,10 +54,13 @@ func _input(event):
 	if event is InputEventKey:
 		if event.scancode == KEY_Z:
 			set_process_input(false)
-			npc.talk("A")
+			npc.talk("1")
 		elif event.scancode == KEY_X:
 			set_process_input(false)
-			npc.talk("B")
+			npc.talk("2")
+		elif event.scancode == KEY_C:
+			set_process_input(false)
+			npc.talk("3")
 
 func set_answers(answers_array):
 	#delete the labels that were in the answers

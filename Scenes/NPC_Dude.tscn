@@ -3,7 +3,7 @@
 [ext_resource path="res://Resources/NPC_Portraits/non_player_character/npc_idle_2.png" type="Texture" id=1]
 [ext_resource path="res://Resources/NPC_Portraits/non_player_character/npc_idle_1.png" type="Texture" id=2]
 [ext_resource path="res://Resources/NPC_Portraits/non_player_character/npc_talk.png" type="Texture" id=3]
-[ext_resource path="res://Scripts/Fiona.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/NPC_Dude.gd" type="Script" id=4]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -33,7 +33,6 @@ script = ExtResource( 4 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 animation = "idle"
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
