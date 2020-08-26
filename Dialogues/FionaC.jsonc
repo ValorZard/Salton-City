@@ -1,0 +1,47 @@
+{
+    "firstName": "Fiona",
+    "lastName": "Jackson",
+    "gender": "female",
+    "age": 24, //RARARARARARARARARARARAR umamam i got a pokerface
+    "dialogues": {
+      "Dialogue1": {
+        "dialogueText": "Oh hi there (name), did you come just to visit little ol me?",
+        "answers": {
+          "Let's chat": "Dialogue1A",
+          "Anything I can do for you?": "Dialogue1B",
+          "Just saying hi!": "Dialogue1C"
+        }
+      },
+      "Dialogue1A": {
+        "dialogueText": "You know, before I ran this inn I used to be a cheeky lil nomad. \nThose were some of the craziest years of my life. \nSo many towns, so many people. \nI went wild..maybe a little TOO wild if you know what I mean. \nEr. Nevermind.",
+        "answers": {
+          "Bye": "END"
+        }
+      },
+      "Dialogue1B": {
+        "dialogueText": "Well if it doesn't take too much of your time would you mind delivering (some object) to (npc)? \nThey left it behind last time they visited and I'd feel really bad if they ever needed it...",
+        "answers": {
+          "Just leave it to me": "Dialogue1B1",
+          "Sorry, find someone else to do it!": "Dialogue1B2"
+        }
+      },
+      "Dialogue1B1": {
+        "dialogueText": "Thank you so much, you have no idea how much of a lifesaver you are!",
+        "answers": {
+          "Bye": "END"
+        }
+      },
+      "Dialogue1B2": {
+        "dialogueText": "O-oh no problem, I guess I can just get around to it later... (might trigger depressive state)",
+        "answers": {
+          "Bye": "END"
+        }
+      },
+      "Dialogue1C": {
+        "dialogueText": "Well it's always nice to see you, (player)!",
+        "answers": {
+          "Bye": "END"
+        }
+      }
+    }
+  }

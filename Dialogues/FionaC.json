@@ -1,0 +1,65 @@
+{
+    "first_name": "Fiona",
+    "last_name": "Jackson",
+    "gender": "female",
+    "age": 24,
+
+    "npc_states": {
+        "quest_start": {
+            "dialogues": {
+                "dialogue_1": {
+                    "dialogue_text": "Oh hi there (name), did you come just to visit little ol me?",
+                    "answers": {
+                        "Let's chat": "dialogue_1a",
+                        "Anything I can do for you?": "dialogue_1b",
+                        "Just saying hi!": "dialogue_1c"
+                    },
+                    "npc_mood": "cheerful"
+                },
+                "dialogue_1a": {
+                    "dialogue_text": "You know, before I ran this inn I used to be a cheeky lil nomad. \nThose were some of the craziest years of my life. \nSo many towns, so many people. \nI went wild..maybe a little TOO wild if you know what I mean. \nEr. Nevermind.",
+                    "answers": {
+                        "Bye": "end"
+                    }
+                },
+                "dialogue_1b": {
+                    "dialogue_text": "Well if it doesn't take too much of your time would you mind delivering (some object) to (npc)? \nThey left it behind last time they visited and I'd feel really bad if they ever needed it...",
+                    "answers": {
+                        "Just leave it to me": "dialogue_1b1",
+                        "Sorry, find someone else to do it!": "dialogue_1b2"
+                    }
+                },
+                "dialogue_1b1": {
+                    "dialogue_text": "Thank you so much, you have no idea how much of a lifesaver you are!",
+                    "answers": {
+                        "Bye": "end"
+                    },
+                    "npc_state": "quest_during"
+                },
+                "dialogue_1b2": {
+                    "dialogue_text": "O-oh no problem, I guess I can just get around to it later... (might trigger depressive state)",
+                    "answers": {
+                        "Bye": "end"
+                    },
+                    "npc_mood": "depression"
+                },
+                "dialogue_1c": {
+                    "dialogue_text": "Well it's always nice to see you, (player)!",
+                    "answers": {
+                        "Bye": "end"
+                    }
+                }
+            }
+        },
+        "quest_during": {
+            "dialogues": {
+                "dialogue_1": {
+                    "dialogue_text": "Did you do it yet?",
+                    "answers": {
+                        "Not yet...": "end"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -6,13 +6,19 @@ extends StaticBody2D
 # var b = "text"
 enum QuestStatus {NOT_STARTED, STARTED, COMPLETED}
 var quest_status = QuestStatus.NOT_STARTED
-var dialogue_state := "Dialogue1" #current state of the dialogue
+
+var npc_state = "quest_start"
+var temp_npc_state = "" #what the npc state will change to after that loop is done
+var is_changing_states = false
+
+var npc_mood = "cheerful"
+var dialogue_state := "dialogue_1" #current state of the dialogue
 var necklace_found := false
 
 onready var dialoguePopup = get_node("../Player/UI_Layers/DialoguePopup")
 onready var player = get_tree().root.get_node("Player")
 
-onready var path_to_dialogue = "res://Dialogues/Fiona.json"
+onready var path_to_dialogue = "res://Dialogues/FionaC.json"
 var raw_dialogue := ""
 
 onready var answer_dictionary = Dictionary()
@@ -44,14 +50,20 @@ func talk(answer = ""):
 	#Set Fiona's animation to "talk"
 	get_node("AnimatedSprite").play("talk")
 	
+	
 	#set dialogue
 	if(answer_dictionary.has(answer)):
 		var answer_text = answer_dictionary[answer]
-		dialogue_state = json_reader["dialogues"][dialogue_state]["answers"][answer_text]
+		print("Attempted answer")
+		print(answer_text)
+		print("npc_state: " + npc_state)
+		print("dialogue_state: " + dialogue_state)
+		dialogue_state = json_reader["npc_states"][npc_state]["dialogues"][dialogue_state]["answers"][answer_text]
 	
-	if(dialogue_state == "END"):
+	
+	if(dialogue_state == "end"):
 		#reset dialogue state
-		dialogue_state = "Dialogue1"
+		dialogue_state = "dialogue_1"
 		#Close dialogue popup
 		dialoguePopup.close()
 		#Set Fiona's animation to "idle"
@@ -59,18 +71,21 @@ func talk(answer = ""):
 	else:
 		#print player
 		dialoguePopup.npc = self
-		dialoguePopup.npc_name = json_reader["firstName"] + " " + json_reader["lastName"]
+		dialoguePopup.npc_name = json_reader["first_name"] + " " + json_reader["last_name"]
 	
 		#print dialogues
-	
-		dialoguePopup.dialogue = json_reader["dialogues"][dialogue_state]["dialogueText"]
+		
+		print(npc_state)
+		print(dialogue_state)
+		
+		dialoguePopup.dialogue = json_reader["npc_states"][npc_state]["dialogues"][dialogue_state]["dialogue_text"]
 	
 		#add answers to dialogue
 		answer_dictionary.clear() #this stores the answers in relation to number-strings
 		var answer_array = []
 		var answer_index = 1
 	
-		for potential_answer in json_reader["dialogues"][dialogue_state]["answers"]:
+		for potential_answer in json_reader["npc_states"][npc_state]["dialogues"][dialogue_state]["answers"]:
 			answer_dictionary[str(answer_index)] = potential_answer
 			answer_array.append(potential_answer)
 			answer_index += 1
@@ -79,6 +94,27 @@ func talk(answer = ""):
 		dialoguePopup.set_answers(answer_array)
 		dialoguePopup.open()
 	
+	print("before npc state change")
+	print("npc_state: " + npc_state)
+	print("dialogue_state: " + dialogue_state)
+	
+	#chaning npc states. Makes it so that it buffers until the next loop
+	if(is_changing_states):
+		npc_state = temp_npc_state
+		is_changing_states = false
+	
+	if(json_reader["npc_states"][npc_state]["dialogues"][dialogue_state].has("npc_state")):
+		temp_npc_state = json_reader["npc_states"][npc_state]["dialogues"][dialogue_state]["npc_state"]
+		is_changing_states = true
+	
+	#chaning mood. Doesnt need to be as complicated
+	if(json_reader["npc_states"][npc_state]["dialogues"][dialogue_state].has("npc_mood")):
+		npc_mood = json_reader["npc_states"][npc_state]["dialogues"][dialogue_state]["npc_mood"]
+	
+	
+	print("after npc state change")
+	print("npc_state: " + npc_state)
+	print("dialogue_state: " + dialogue_state)
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
