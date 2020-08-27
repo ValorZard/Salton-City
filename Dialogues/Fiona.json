@@ -1,8 +1,6 @@
 {
   "firstName": "Fiona",
   "lastName": "Jackson",
-  "gender": "female",
-  "age": 24,
   "dialogues": {
     "Dialogue1": {
       "dialogueText": "Oh hi there (name), did you come just to visit little ol me?",
