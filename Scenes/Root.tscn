@@ -148,5 +148,6 @@ position = Vector2( 182.311, 189.961 )
 position = Vector2( 317.881, 146.555 )
 
 [node name="icon" type="Sprite" parent="."]
-position = Vector2( 349.817, 35.4437 )
+position = Vector2( 53.817, 31.4437 )
+scale = Vector2( 2.25, 1 )
 texture = ExtResource( 4 )
