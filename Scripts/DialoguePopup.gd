@@ -1,4 +1,4 @@
-extends PopupDialog
+extends TextureRect
 
 
 # Declare member variables here. Examples:
@@ -11,41 +11,58 @@ var answers setget answers_set
 var npc 
 
 onready var answer_labels := []
-export var answer_buffer := 15
+export var answer_buffer := 15 # between dialogue and answers labels in pixels
+
+var menu_buffer := 0.5 
+var buffer_left = menu_buffer #time till input
+var menu_input_bool := false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_process_input(false) #cuz its hidden
+	visible = false
 	pass # Replace with function body.
 
 func name_set(new_name):
 	npc_name = new_name
-	get_node("DialogueBox/NPCName").text = npc_name
+	get_node("NPCName").text = npc_name
 	pass
 
 func dialogue_set(new_dialogue):
 	dialogue = new_dialogue
-	get_node("DialogueBox/Dialogue").text = dialogue
+	get_node("ScrollContainer/Dialogue").text = dialogue
 	pass
 
 func answers_set(new_value):
 	answers = new_value
-	get_node("DialogueBox/Answers").text = new_value
+	get_node("Answers").text = new_value
 	pass
 
 func open():
 	get_tree().paused = true #pause game
-	popup() #popup
-	get_node("AnimationPlayer").playback_speed = 60.0 / dialogue.length()
-	get_node("AnimationPlayer").play("ShowDialogue")
+	visible = true #popup
+	menu_input_bool = true
 	pass
 
 func close():
 	get_tree().paused = false
-	hide()
+	visible = false
+	set_process_input(false)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	check_if_allows_input(delta)
+	pass
+
+#this adds a buffer to the menu so that you dont instantly exit out
+func check_if_allows_input(delta):
+	if(menu_input_bool):
+		buffer_left -= delta
+		if(buffer_left <= 0):
+			menu_input_bool = false
+			set_process_input(true)
+			buffer_left = menu_buffer
+	pass
 
 ##REDO THIS CODE I DONT LIKE THIS
 # make this much less key dependent
@@ -69,23 +86,21 @@ func set_answers(answers_array):
 	answer_labels.clear()
 	
 	var answer_number := 0
-	var dialogue_label := get_node("DialogueBox/Dialogue")
+	var dialogue_node:= get_node("ScrollContainer")
 	
 	for answer in answers_array:
 		var answer_label := Label.new()
 		answer_label.text = answer
 		#offset
-		var vertical_offset = dialogue_label.rect_global_position.y + dialogue_label.rect_size.y + (answer_buffer * answer_number)
-		var horizontal_offset = dialogue_label.rect_global_position.x + rect_size.x/2
+		var vertical_offset = dialogue_node.rect_global_position.y + dialogue_node.rect_size.y + (answer_buffer * answer_number)
+		var horizontal_offset = dialogue_node.rect_global_position.x + rect_size.x/2
 		answer_label.rect_position = Vector2(horizontal_offset, vertical_offset)
 		#color
-		answer_label.set("custom_colors/font_color", Color("Black"))
+		answer_label.set("custom_colors/font_color", Color(0, 0, 0))
 		#child
 		add_child(answer_label)
 		answer_labels.append(answer_label)
 		answer_number += 1
+		print("HELP " + str(answer_label.get_global_transform()))
 	pass
 
-func _on_AnimationPlayer_animation_finished(anim_name):
-	set_process_input(true) #NOW you can do input
-	pass # Replace with function body.

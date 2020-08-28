@@ -79,7 +79,9 @@ func talk(answer = ""):
 		print(dialogue_state)
 		
 		dialoguePopup.dialogue = json_reader["npc_states"][npc_state]["dialogues"][dialogue_state]["dialogue_text"]
-	
+		
+		print(dialoguePopup.dialogue)
+		
 		#add answers to dialogue
 		answer_dictionary.clear() #this stores the answers in relation to number-strings
 		var answer_array = []
