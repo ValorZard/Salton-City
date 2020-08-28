@@ -8,7 +8,7 @@
         "quest_start": {
             "dialogues": {
                 "dialogue_1": {
-                    "dialogue_text": "Oh hi there (name), did you come just to visit little ol me?",
+                    "dialogue_text": "Oh hi there (name), did you come just to visit little ol me? I do not want a taco.",
                     "answers": {
                         "Let's chat": "dialogue_1a",
                         "Anything I can do for you?": "dialogue_1b",
